@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Operation {{ operation.id }}</h2>
+<ul class="list-group mb-3">
+  <li class="list-group-item"><strong>Name:</strong> {{ operation.name }}</li>
+  <li class="list-group-item"><strong>Status:</strong> {{ operation.status }}</li>
+  <li class="list-group-item"><strong>Owner:</strong> {{ operation.owner }}</li>
+  <li class="list-group-item"><strong>Description:</strong> {{ operation.description }}</li>
+</ul>
+<form method="post" action="update_status/" class="d-flex gap-2">
+  {% csrf_token %}
+  <input type="hidden" name="status" value="completed" />
+  <button type="submit" class="btn btn-success">Complete</button>
+</form>
+<form method="post" action="update_status/" class="d-inline-block me-2">
+  {% csrf_token %}
+  <input type="hidden" name="status" value="paused" />
+  <button type="submit" class="btn btn-warning">Pause</button>
+</form>
+<form method="post" action="update_status/" class="d-inline-block">
+  {% csrf_token %}
+  <input type="hidden" name="status" value="canceled" />
+  <button type="submit" class="btn btn-danger">Cancel</button>
+</form>
+<a href="../" class="btn btn-link mt-3">Back to list</a>
+{% endblock %}
